@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from app.database import engine, Base
 from app import models  # noqa: F401
-from app.routers import auth, properties, bookings, admin
+from app.routers import auth, properties, bookings, admin, images
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -24,6 +24,7 @@ app.include_router(auth.router)
 app.include_router(properties.router)
 app.include_router(bookings.router)
 app.include_router(admin.router)
+app.include_router(images.router)
 
 
 @app.get("/")

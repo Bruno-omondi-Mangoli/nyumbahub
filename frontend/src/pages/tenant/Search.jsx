@@ -4,7 +4,8 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import HouseCard from '../../components/HouseCard'
 import Spinner from '../../components/Spinner'
-import { Search, SlidersHorizontal, X } from 'lucide-react'
+import { Search, SlidersHorizontal, X, Map, List } from 'lucide-react'
+import MapView from '../../components/MapView'
 import toast from 'react-hot-toast'
 
 const houseTypes = ['bedsitter', 'single_room', '1BR', '2BR', '3BR', '4BR']
@@ -60,6 +61,7 @@ const TenantSearch = () => {
   }
 
   const totalPages = Math.ceil(total / 9)
+  const [viewMode, setViewMode] = useState('list')
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -142,6 +144,34 @@ const TenantSearch = () => {
             </div>
           )}
         </form>
+
+      {/* View Toggle */}
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-gray-500 text-sm">{total} properties found</p>
+          <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors ${viewMode === 'list' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:bg-gray-50'}`}
+            >
+              <List className="w-4 h-4" />
+              <span>List</span>
+            </button>
+            <button
+              onClick={() => setViewMode('map')}
+              className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors ${viewMode === 'map' ? 'bg-primary-600 text-white' : 'text-gray-600 hover:bg-gray-50'}`}
+            >
+              <Map className="w-4 h-4" />
+              <span>Map</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Map View */}
+        {viewMode === 'map' && (
+          <div style={{ height: '500px', width: '100%' }} className="rounded-xl overflow-hidden shadow-sm mb-6">
+            <MapView properties={properties} />
+          </div>
+        )}
 
         {/* Results */}
         {loading ? (

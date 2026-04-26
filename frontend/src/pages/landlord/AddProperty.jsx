@@ -160,6 +160,12 @@ const AddProperty = () => {
             </div>
           </div>
 
+          {/* Images */}
+          <div className="card space-y-4">
+            <h2 className="text-lg font-semibold text-gray-900">Images</h2>
+            <p className="text-sm text-gray-500">You can upload images after creating the property from the Edit page.</p>
+          </div>
+
           {/* Submit */}
           <button type="submit" disabled={loading}
             className="w-full btn-primary py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed">
