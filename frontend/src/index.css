@@ -6,36 +6,48 @@
 
 @layer base {
   * {
-    @apply box-border;
+    box-sizing: border-box;
   }
   body {
-    @apply font-sans bg-gray-50 text-gray-900 antialiased;
+    background-color: #0a2e1f;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200 font-medium;
+    @apply bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-400 transition-colors duration-200 font-medium;
   }
   .btn-secondary {
-    @apply bg-white text-primary-600 border border-primary-600 px-4 py-2 rounded-lg hover:bg-primary-50 transition-colors duration-200 font-medium;
+    @apply text-primary-400 border border-primary-500 px-4 py-2 rounded-lg transition-colors duration-200 font-medium;
+    background-color: #114d34;
   }
   .btn-danger {
-    @apply bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium;
+    @apply bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition-colors duration-200 font-medium;
   }
   .input-field {
-    @apply w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+    @apply w-full border border-primary-900 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+    background-color: #114d34;
+  }
+  .input-field::placeholder {
+    color: #6b7280;
   }
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+    @apply rounded-xl border border-primary-900 p-6;
+    background-color: #0d3d29;
   }
   .badge-vacant {
-    @apply bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded-full;
+    @apply text-primary-400 text-xs font-medium px-2 py-1 rounded-full;
+    background-color: #004d2e;
   }
   .badge-occupied {
-    @apply bg-red-100 text-red-700 text-xs font-medium px-2 py-1 rounded-full;
+    @apply text-red-400 text-xs font-medium px-2 py-1 rounded-full;
+    background-color: #450a0a;
   }
   .badge-active {
-    @apply bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full;
+    @apply text-primary-300 text-xs font-medium px-2 py-1 rounded-full;
+    background-color: #004d2e;
   }
 }

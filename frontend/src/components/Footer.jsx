@@ -1,114 +1,45 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { Home, Menu, X, LogOut, User, Search, BookMarked, LayoutDashboard } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Home } from 'lucide-react'
 
-const Navbar = () => {
-  const { isAuthenticated, user, logout, isAdmin, isLandlord, isTenant } = useAuth()
-  const navigate = useNavigate()
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  const handleLogout = () => {
-    logout()
-    navigate('/')
-  }
-
-  const getDashboardLink = () => {
-    if (isAdmin) return '/admin/dashboard'
-    if (isLandlord) return '/landlord/dashboard'
-    return '/tenant/dashboard'
-  }
-
+const Footer = () => {
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+    <footer className="bg-dark-800 border-t border-dark-600 text-gray-400 py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-primary-600 p-2 rounded-lg">
-              <Home className="w-5 h-5 text-white" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="bg-primary-500 p-2 rounded-lg">
+                <Home className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-white">NyumbaHub</span>
             </div>
-            <span className="text-xl font-bold text-primary-600">NyumbaHub</span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-6">
-            {!isAuthenticated ? (
-              <>
-                <Link to="/" className="text-gray-600 hover:text-primary-600 font-medium transition-colors">
-                  Home
-                </Link>
-                <Link to="/login" className="btn-secondary">Login</Link>
-                <Link to="/register" className="btn-primary">Get Started</Link>
-              </>
-            ) : (
-              <>
-                {isTenant && (
-                  <>
-                    <Link to="/tenant/search" className="flex items-center space-x-1 text-gray-600 hover:text-primary-600 font-medium">
-                      <Search className="w-4 h-4" />
-                      <span>Search</span>
-                    </Link>
-                    <Link to="/tenant/bookmarks" className="flex items-center space-x-1 text-gray-600 hover:text-primary-600 font-medium">
-                      <BookMarked className="w-4 h-4" />
-                      <span>Saved</span>
-                    </Link>
-                  </>
-                )}
-                {isLandlord && (
-                  <Link to="/landlord/my-properties" className="flex items-center space-x-1 text-gray-600 hover:text-primary-600 font-medium">
-                    <LayoutDashboard className="w-4 h-4" />
-                    <span>My Properties</span>
-                  </Link>
-                )}
-                <Link to={getDashboardLink()} className="flex items-center space-x-1 text-gray-600 hover:text-primary-600 font-medium">
-                  <User className="w-4 h-4" />
-                  <span>{user?.full_name?.split(' ')[0]}</span>
-                </Link>
-                <button onClick={handleLogout} className="flex items-center space-x-1 text-red-500 hover:text-red-700 font-medium transition-colors">
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
-              </>
-            )}
+            <p className="text-sm text-gray-500">
+              Kenya's modern house locator platform. Find your perfect home or list your property with ease.
+            </p>
           </div>
-
-          {/* Mobile menu button */}
-          <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div>
+            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/" className="hover:text-primary-400 transition-colors">Home</Link></li>
+              <li><Link to="/register" className="hover:text-primary-400 transition-colors">Register</Link></li>
+              <li><Link to="/login" className="hover:text-primary-400 transition-colors">Login</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-4">Contact</h4>
+            <ul className="space-y-2 text-sm">
+              <li>Nairobi, Kenya</li>
+              <li>info@nyumbahub.co.ke</li>
+              <li>+254 700 000 000</li>
+            </ul>
+          </div>
         </div>
-
-        {/* Mobile Menu */}
-        {menuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 space-y-3">
-            {!isAuthenticated ? (
-              <>
-                <Link to="/" className="block text-gray-600 font-medium py-2" onClick={() => setMenuOpen(false)}>Home</Link>
-                <Link to="/login" className="block btn-secondary text-center" onClick={() => setMenuOpen(false)}>Login</Link>
-                <Link to="/register" className="block btn-primary text-center" onClick={() => setMenuOpen(false)}>Get Started</Link>
-              </>
-            ) : (
-              <>
-                <Link to={getDashboardLink()} className="block text-gray-600 font-medium py-2" onClick={() => setMenuOpen(false)}>Dashboard</Link>
-                {isTenant && (
-                  <>
-                    <Link to="/tenant/search" className="block text-gray-600 font-medium py-2" onClick={() => setMenuOpen(false)}>Search Houses</Link>
-                    <Link to="/tenant/bookmarks" className="block text-gray-600 font-medium py-2" onClick={() => setMenuOpen(false)}>Saved Houses</Link>
-                  </>
-                )}
-                {isLandlord && (
-                  <Link to="/landlord/my-properties" className="block text-gray-600 font-medium py-2" onClick={() => setMenuOpen(false)}>My Properties</Link>
-                )}
-                <button onClick={handleLogout} className="block w-full text-left text-red-500 font-medium py-2">Logout</button>
-              </>
-            )}
-          </div>
-        )}
+        <div className="border-t border-dark-600 mt-8 pt-8 text-center text-sm text-gray-600">
+          © {new Date().getFullYear()} NyumbaHub. All rights reserved.
+        </div>
       </div>
-    </nav>
+    </footer>
   )
 }
 
-export default Navbar
+export default Footer
