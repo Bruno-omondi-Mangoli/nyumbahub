@@ -29,8 +29,8 @@ const Footer = () => {
             <h4 className="text-white font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
               <li>Nairobi, Kenya</li>
-              <li>info@nyumbahub.co.ke</li>
-              <li>+254 700 000 000</li>
+              <li>mangolibruno@gmail.com</li>
+              <li>+254704708970</li>
             </ul>
           </div>
         </div>
