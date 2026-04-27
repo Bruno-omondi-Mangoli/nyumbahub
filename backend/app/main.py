@@ -13,11 +13,8 @@ app = FastAPI(title="NyumbaHub API", version="1.0.0")
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-    "http://localhost:5173",
-    "https://frontend-three-azure-84.vercel.app",
-],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
